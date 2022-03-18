@@ -1,23 +1,26 @@
 import './App.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from './home';
 import Cart from './cart';
 import Header from './header';
 
 function App() {
+
+  
+
   return (
     
      <BrowserRouter>
      <Header/>
      <div className="App">
-   
-     <Route path="/">
-       <Home/>
-     </Route>
-     <Route path="/cart">
-     <Cart/>
-     </Route>
+     <Routes>
+     <Route path="/" element={<Home/>} exact />
+     
+     <Route path="/cart" element={<Cart/>} />
+     </Routes>
+     
      </div>
+
      </BrowserRouter>
     
     
