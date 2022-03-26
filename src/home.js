@@ -1,30 +1,35 @@
 import React from 'react'
-import faker from "@faker-js/faker"
+//import faker from "@faker-js/faker"
 import SinglePerson from './singlePerson'
+import { useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Home = () => {
   
-  var rows = [];
-for (var i = 0; i < 21; i++) {
 
-    rows.push({
-      index:i,
-       firstName:faker.name.firstName(),
-      image:faker.image.avatar(),
-      contactNo:faker.phone.phoneNumber(),
-      personId:faker.datatype.uuid()
+const [products, setProducts] = useState([])
 
-    });
-}
+useEffect(() => {
+  //Runs only on the first render
 
+  fetch("https://fakestoreapi.com/products")
+  .then((res) => res.json())
+  .then((json) => {
+   setProducts(json)
+   
+  });
+}, []);
+  
   return (
-    <div >
+    <div className='home-div'>
      
-       <div className='person'>
+       <div className='person d-flex flex-row flex-wrap justify-content-around  w-100 mt-4 '>
         
-        {rows.map((obj)=>{
-            console.log("")
-           return <SinglePerson key={obj.index} name={obj.firstName} img={obj.image} contact={obj.contactNo} id={obj.personId} />
-          }
+        {products.map((obj)=>{
+           
+          // return <SinglePerson key={obj.id} name={obj.title} price={obj.price} img={obj.image} describtion={obj.description} ratings={obj.rating} />
+            return <SinglePerson key={obj.id} prod={obj}></SinglePerson>
+        }
         )
            }
         
