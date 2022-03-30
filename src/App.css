@@ -44,4 +44,15 @@ body {
   height: 40% !important;
   object-fit: contain;
 }
+.inner-star{
+  width:fit-content !important ;
+}
+.filters{
+  width: 20vw;
+  height:98vh;
 
+}
+
+.filters>span{
+  margin-bottom:25px ;
+}
