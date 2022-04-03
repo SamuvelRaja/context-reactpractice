@@ -8,6 +8,20 @@ import { useContext } from 'react';
 const Filters = () => {
    const [rate, setRate] = useState(5)
     const{dispatch}=useContext(cartContext)
+    const clear=()=>{
+       console.log("clearrrrrrr")
+ fetch("https://fakestoreapi.com/products")
+ .then((res) => res.json())
+ .then((json) => {
+dispatch({
+  type:"ADD_PRODUCT",
+  payload:json
+})
+
+
+  
+ })
+    }
   return (
     <>
     <h4 className='text-light text-center'>Filter products</h4>
@@ -60,7 +74,7 @@ const Filters = () => {
 
     </span>
     <span>
-        <button className='btn btn-light'>
+        <button className='btn btn-light' onClick={()=>{clear()}}>
             Clear Filters
         </button>
     </span>

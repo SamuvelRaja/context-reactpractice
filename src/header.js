@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaShoppingCart} from "react-icons/fa"
 import { useContext } from 'react'
 import { cartContext } from './context'
+import {Dropdown} from "react-bootstrap"
 
 const Header = () => {
   const{state}=useContext(cartContext)
+  console.log(state.cart)
   return (
     
      <div className='navbar navbar-light text-light bg-secondary header d-flex justify-content-around shadow-sm'  >
@@ -18,23 +20,27 @@ const Header = () => {
         <input placeholder='search here' className='input border-0 w-25 p-1 rounded'/>
 
 
-         <div className='dropdown'>
-           <button className='btn dropdown-toggle btn-success px-4'>
-             <span>
+         <Dropdown>
+           <Dropdown.Toggle className='px-4' variant="success">
+             
                <FaShoppingCart color="white" size={25}/>
                {state.cart.length} 
-             </span>
-             <div className='dropdown-menu'>
+               </Dropdown.Toggle> 
+             <Dropdown.Menu style={{ minWidth: 370 }}>
                   {
+                       state.cart.length > 0 ? (
                     state.cart.map((obj)=>{
-                      return <div>
-                        <i
-                        </div>
-                    })
+                     // console.log(obj.title.slice(0, 20))
+                      return <span key={obj.id} className="d-flex dropdown-item justify-content-around align-items-center">
+                       <img src={obj.image} alt={obj.title} className="image-fluid cart-image rounded-circle"/>
+                       <h6>{obj.title.slice(0, 8)}</h6>
+                       <h6 className='text'>{obj.price}</h6>
+                        </span>
+                    })):<h4>cart is empty!!</h4>
                   }
-             </div>
-            </button> 
-          </div>
+             </Dropdown.Menu>
+         
+          </Dropdown>
     </div>
    
   )

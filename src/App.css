@@ -56,3 +56,10 @@ body {
 .filters>span{
   margin-bottom:25px ;
 }
+.cart-image{
+  
+    width: 50px !important;;
+    height: 50px !important;
+    object-fit: contain;
+  
+}

@@ -7,7 +7,7 @@ const reducer = (state, action)=>{
     switch(action.type){
 
       case "ADD_PRODUCT":
-        return{products:[...action.payload] , cart:[ ]}
+        return{products:[...action.payload] , cart:[...state.cart ]}
     
 
       case "ADD_TO_CART":
@@ -17,19 +17,19 @@ const reducer = (state, action)=>{
           return{...state, cart:[...action.payload]}
 
         case "LOW_TO_HIGH":
-          return{products:state.products.sort(function(a,b){return a.rating.rate-b.rating.rate}), cart:[state.cart]}  
+          return{products:state.products.sort(function(a,b){return a.rating.rate-b.rating.rate}), cart:[...state.cart]}  
       
         case "HIGH_TO_LOW":
-          return{products:state.products.sort(function(a,b){return b.rating.rate-a.rating.rate}), cart:[state.cart]}  
+          return{products:state.products.sort(function(a,b){return b.rating.rate-a.rating.rate}), cart:[...state.cart]}  
         
         case "COSTLY":
-          return{products:state.products.sort(function(a,b){return b.price-a.price}), cart:[state.cart]} 
+          return{products:state.products.sort(function(a,b){return b.price-a.price}), cart:[...state.cart]} 
               
         case "CHEAP":
-           return{products:state.products.sort(function(a,b){return a.price-b.price}), cart:[state.cart]}      
+           return{products:state.products.sort(function(a,b){return a.price-b.price}), cart:[...state.cart]}      
           
        case "RATING_FILTER":
-            return{products:[...state.products.filter((obj)=>{return Math.round(obj.rating.rate)===action.payload}), ...state.products], cart:[state.cart]}    
+            return{products:[...state.products.filter((obj)=>{return Math.round(obj.rating.rate)===action.payload}), ...state.products.filter((obj)=>{return Math.round(obj.rating.rate)!==action.payload})], cart:[...state.cart]}    
            
          
      default:
@@ -55,7 +55,7 @@ useEffect(() => {
    type:"ADD_PRODUCT",
    payload:json
  })
- console.log(json)
+
  
    
   })
@@ -63,7 +63,7 @@ useEffect(() => {
 
 
     const[state, dispatch]=useReducer(reducer ,{products:productArr, cart:[ ]})
-    console.log(state)
+ 
     console.log(state.products)
    // const [cart, setCart] = useState([])
   return (

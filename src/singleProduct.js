@@ -25,9 +25,9 @@ const removeHandler=(obj)=>{
   return (
     <div className='single-product card  mx-2 mb-4  '>
        
-       <img src={prod.image} className="product-image card-img-top image-fluid mt-3" alt={prod.name}></img>
+       <img src={prod.image} className="product-image card-img-top image-fluid mt-3 " alt={prod.title}></img>
        <div className='card-body d-flex flex-column justify-content-between p-2 '>
-         <h4 className='card-title text-center'>{prod.title.slice(0, 20)}</h4>
+         <h4 className='card-title text-center fs-5' >{prod.title.slice(0, 20)}</h4>
          <h6 className='card-text mx-3'>${prod.price}</h6>
         <span className='mx-3'>
            <Ratings rate={prod.rating.rate}/>
